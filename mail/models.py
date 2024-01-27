@@ -1,8 +1,9 @@
 from django.core.validators import RegexValidator
 from django.db import models
-from datetime import datetime
 
 from phonenumber_field.modelfields import PhoneNumberField
+
+from .utils import create_massages
 
 
 class Client(models.Model):
@@ -41,13 +42,4 @@ class Mailing(models.Model):
             self, force_insert=False, force_update=False, using=None, update_fields=None
     ):
         super().save()
-        recipients = Client.objects.filter(tag=self.filter)
-
-        lower_date_time = self.date_time_mailing.strftime('%Y-%m-%d %H:%M:%S')
-        now_date_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        upper_date_time = self.end_date_time_mailing.strftime('%Y-%m-%d %H:%M:%S')
-
-        if lower_date_time < now_date_time < upper_date_time:
-            for client in recipients:
-                Message.objects.create(date_time_create=datetime.now(), mailing=self, client=client)
-                print(f'Письмо для клиента с id = {client.pk}: "{self.message_text}"')
+        create_massages(self)

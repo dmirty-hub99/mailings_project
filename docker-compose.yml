@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+
+  webapp:
+    restart: always
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    command: [ "python3", "manage.py", "runserver", "0.0.0.0:8000"]
+
+  redis:
+    image: redis
+    restart: always
+
+  worker:
+    restart: always
+    build:
+      context: .
+    command: [ "celery", "-A", "mailings_project", "worker"]
