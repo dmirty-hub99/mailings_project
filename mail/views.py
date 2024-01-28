@@ -1,10 +1,7 @@
-from django.http import HttpResponse
 from rest_framework import generics
 
 from .models import Client, Mailing, Message
 from .serializers import ClientSerializer, MailingSerializer, MessageSerializer
-
-from . import tasks
 
 
 class AddClient(generics.CreateAPIView):
@@ -30,4 +27,3 @@ class AllMailings(generics.ListAPIView):
 class AllMessages(generics.ListAPIView):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
-
