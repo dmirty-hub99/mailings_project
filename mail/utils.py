@@ -18,4 +18,4 @@ def create_messages(mailing):
             print(f'Письмо для клиента с id = {client.pk}: "{mailing.message_text}"')
 
     if lower_date_time > now_date_time:
-        create_pending_messages.delay(mailing=mailing)
+        create_pending_messages.delay(mailing_id=mailing.pk)

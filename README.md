@@ -63,6 +63,6 @@ JSON:
 {
     "date_time_mailing": "2024-01-24 12:52:11",
     "message_text": "test_text_message",
-    "filter": "test_lilter",
+    "filter": "test_tag",
     "end_date_time_mailing": "2024-01-24 12:52:11"
 }
