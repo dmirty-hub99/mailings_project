@@ -4,7 +4,7 @@ from mail import models
 from .tasks import create_pending_messages
 
 
-def create_massages(mailing):
+def create_messages(mailing):
     recipients = models.Client.objects.filter(tag=mailing.filter)
 
     lower_date_time = datetime.strptime(mailing.date_time_mailing.strftime('%Y-%m-%d %H:%M:%S'), '%Y-%m-%d %H:%M:%S')
@@ -18,4 +18,4 @@ def create_massages(mailing):
             print(f'Письмо для клиента с id = {client.pk}: "{mailing.message_text}"')
 
     if lower_date_time > now_date_time:
-        create_pending_messages.delay(mailing)
+        create_pending_messages.delay(mailing=mailing)

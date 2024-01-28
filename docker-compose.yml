@@ -9,6 +9,8 @@ services:
     ports:
       - "8000:8000"
     command: [ "python3", "manage.py", "runserver", "0.0.0.0:8000"]
+    depends_on:
+      - pgdb
 
   redis:
     image: redis
@@ -19,3 +21,11 @@ services:
     build:
       context: .
     command: [ "celery", "-A", "mailings_project", "worker"]
+
+  pgdb:
+    image: postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    container_name: pgdb

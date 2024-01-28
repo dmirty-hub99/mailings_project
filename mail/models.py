@@ -3,7 +3,7 @@ from django.db import models
 
 from phonenumber_field.modelfields import PhoneNumberField
 
-from .utils import create_massages
+from .utils import create_messages
 
 
 class Client(models.Model):
@@ -42,4 +42,4 @@ class Mailing(models.Model):
             self, force_insert=False, force_update=False, using=None, update_fields=None
     ):
         super().save()
-        create_massages(self)
+        create_messages(self)
