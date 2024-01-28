@@ -31,7 +31,3 @@ class AllMessages(generics.ListAPIView):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
 
-
-def test_celery(request):
-    tasks.add.delay()
-    return HttpResponse(content='test_page')
